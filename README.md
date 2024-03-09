@@ -114,7 +114,7 @@ export interface IAppState {
 
 	- Методы корзины: добавление и удаление товара, полное очищение корзины
 	
-	addToCart(value: IProduct): void;
+	addToCart(id: string): void;
 	removeFromCart(id: string): void;
 	clearCart(): void;
 

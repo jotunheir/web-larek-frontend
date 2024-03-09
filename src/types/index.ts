@@ -37,7 +37,7 @@ export interface IAppState {
 	loading: boolean;
 	formErrors: FormErrors;
 
-	addToCart(value: IProduct): void;
+	addToCart(id: string): void;
 	removeFromCart(id: string): void;
 	clearCart(): void;
 
