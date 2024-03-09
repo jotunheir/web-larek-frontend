@@ -59,29 +59,32 @@ export type TPaymentType = 'online' | 'offline'
 описание, изображение, цена и показатель нахождения в корзине
 
 export interface IProduct {
-id: string;
-type: TProductType;
-title: string;
-description: string;
-image: string;
-price: number | null;
-isInCart: boolean;
+    id: string;
+    type: TProductType;
+    title: string;
+    description: string;
+    image: string;
+    price: number | null;
+    isInCart: boolean;
 }
 ```
 ```
-Типизация формы контактов: электронная почта и номер телефона
+Типизация формы контактов: электронная почта, номер телефона и метод валидации
 
 export type TContactsForm = {
-email: string;
-phone: string;
+    email: string;
+    phone: string;
+    validateContacts(): boolean;
 }
 ```
 ```
-Типизация формы заказа: адрес доставки и способ оплаты из TPaymentType
+Типизация формы заказа: адрес доставки, способ оплаты из TPaymentType и метод
+валидации
 
 export type TPaymentForm = {
-address: string;
-payment: TPaymentType;
+    address: string;
+    payment: TPaymentType;
+    validatePayment(): boolean;
 }
 ```
 ```
@@ -91,11 +94,21 @@ export interface IOrderForm extends TContactsForm, TPaymentForm {}
 ```
 ```
 Типизация заказа (расширение IOrderForm): массив выбранных товаров по уникальным 
-ID и общая стоимость корзины
+ID, общая стоимость корзины и методы взаисодействия с корзиной - добавление/удаление
+товаров, полная очистка, получение данных о количестве товаров и их общей стоимости, 
+установка товаров и значений в поля формы заказа
 
 export interface IOrder extends IOrderForm {
-items: string[];
-total: number;
+    items: string[];
+    total: number;
+
+    addToCart(id: string): void;
+    removeFromCart(id: string): void;
+    clearCart(): void;
+    getCartCount(): number;
+    getTotalCartAmount(): number;
+    setCartItems(): void;
+    setOrderField(field: keyof IOrderForm, value: string): void;
 }
 ```
 ```
@@ -111,29 +124,6 @@ export interface IAppState {
 	order: IOrder | null;
 	loading: boolean;
 	formErrors: FormErrors;
-
-	- Методы корзины: добавление и удаление товара, полное очищение корзины
-	
-	addToCart(id: string): void;
-	removeFromCart(id: string): void;
-	clearCart(): void;
-
-	- Геттеры корзины: счетчик товаров в корзине и подсчет полной 
-	стоимости корзины
-	
-	getCartCount(): number;
-	getTotalCartAmount(): number;
-
-	- Сеттеры корзины: установка товаров в корзину и установка данных в поля 
-	формы заказа
-	
-	setCartItems(): void;
-	setOrderField(field: keyof IOrderForm, value: string): void;
-
-	- Методы валидации формы заказа
-	
-	validateContacts(): boolean;
-	validateOrder(): boolean;
 
 	- Методы установки товаров в магазин, очистки заказа и выбранных товаров
 	после покупки

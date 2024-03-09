@@ -16,11 +16,15 @@ export interface IProduct {
 export type TContactsForm = {
 	email: string;
 	phone: string;
+
+	validateContacts(): boolean;
 }
 
 export type TPaymentForm = {
 	address: string;
 	payment: TPaymentType;
+
+	validatePayment(): boolean;
 }
 
 export interface IOrderForm extends TContactsForm, TPaymentForm {}
@@ -28,6 +32,14 @@ export interface IOrderForm extends TContactsForm, TPaymentForm {}
 export interface IOrder extends IOrderForm {
 	items: string[];
 	total: number;
+
+	addToCart(id: string): void;
+	removeFromCart(id: string): void;
+	clearCart(): void;
+	getCartCount(): number;
+	getTotalCartAmount(): number;
+	setCartItems(): void;
+	setOrderField(field: keyof IOrderForm, value: string): void;
 }
 
 export interface IAppState {
@@ -36,19 +48,6 @@ export interface IAppState {
 	order: IOrder | null;
 	loading: boolean;
 	formErrors: FormErrors;
-
-	addToCart(id: string): void;
-	removeFromCart(id: string): void;
-	clearCart(): void;
-
-	getCartCount(): number;
-	getTotalCartAmount(): number;
-
-	setCartItems(): void;
-	setOrderField(field: keyof IOrderForm, value: string): void;
-
-	validateContacts(): boolean;
-	validateOrder(): boolean;
 
 	setStore(items: IProduct[]): void;
 	resetOrder(): boolean;
