@@ -74,6 +74,7 @@ export interface IProduct {
 export type TContactsForm = {
     email: string;
     phone: string;
+  
     validateContacts(): boolean;
 }
 ```
@@ -84,6 +85,7 @@ export type TContactsForm = {
 export type TPaymentForm = {
     address: string;
     payment: TPaymentType;
+  
     validatePayment(): boolean;
 }
 ```
