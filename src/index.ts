@@ -3,7 +3,7 @@ import './scss/styles.scss';
 import { LarekAPI } from './components/LarekAPI';
 import { API_URL, CDN_URL } from './utils/constants';
 
-import { EventEmitter } from './components/base/events';
+import { EventEmitter } from './components/base/Events';
 
 import { Page } from './components/Page';
 import { Modal } from './components/common/Modal';

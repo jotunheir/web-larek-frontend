@@ -1,7 +1,7 @@
 import { ensureElement, cloneTemplate } from "../../utils/utils";
 import { IBasketItemView, IBasketView, ICardActions, IItem } from '../../types';
 import { Component } from "../base/Component";
-import { EventEmitter } from "../base/events";
+import { EventEmitter } from "../base/Events";
 
 export class BasketItem extends Component<IBasketItemView> {
     protected _counter: HTMLElement;

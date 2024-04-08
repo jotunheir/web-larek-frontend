@@ -1,5 +1,5 @@
 import { IOrder, OrderResult, IItem, ILarekAPI, ApiListResponse } from '../types';
-import { Api } from './base/api';
+import { Api } from './base/Api';
 
 export class LarekAPI extends Api implements ILarekAPI {
 
