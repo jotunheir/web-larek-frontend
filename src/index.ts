@@ -96,7 +96,7 @@ events.on(/^order\..*:change/, (data: { value: string }) => {
 events.on('order:open', () => {
 	modal.render({
 		content: paymentForm.render({
-			payment: 'cash',
+			payment: '',
 			address: '',
 			valid: false,
 			errors: [],
@@ -129,6 +129,7 @@ events.on('contacts:submit', () => {
 				content: success.render({}),
 			});
 
+			paymentForm.setPaymentButton('');
 			appData.clearOrder();
 		})
 		.catch((err) => {
