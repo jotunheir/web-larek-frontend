@@ -1,6 +1,6 @@
 export type ApiListResponse<Type> = {
-	total: number,
-	items: Type[]
+	total: number;
+	items: Type[];
 };
 export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
 export interface ILarekAPI {
@@ -18,13 +18,16 @@ export interface IPage {
 export type EventName = string | RegExp;
 export type Subscriber = Function;
 export type EmitterEvent = {
-	eventName: string,
-	data: unknown
+	eventName: string;
+	data: unknown;
 };
 export interface IEvents {
 	on<T extends object>(event: EventName, callback: (data: T) => void): void;
 	emit<T extends object>(event: string, data?: T): void;
-	trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void;
+	trigger<T extends object>(
+		event: string,
+		context?: Partial<T>
+	): (data: T) => void;
 }
 
 export interface IModalData {
@@ -41,19 +44,13 @@ export interface IBasketItemView {
 	price: number;
 }
 
-export interface ICard {
-	description?: string;
-	image?: string;
-	title: string;
-	category?: string;
-	price: number | null;
-}
+export interface ICard extends Omit<IItem, 'id'> {}
 export interface ICardActions {
 	onClick: (event: MouseEvent) => void;
 }
 
 export type CatalogChangeEvent = {
-	catalog: IItem[]
+	catalog: IItem[];
 };
 
 export interface IItem {
@@ -77,15 +74,16 @@ export interface IContactsForm {
 	email: string;
 	phone: string;
 }
-export interface IOrderForm extends IPaymentForm, IContactsForm {}
 export type FormErrors = Partial<Record<keyof IOrder, string>>;
 
-export interface IOrder extends IOrderForm{
+export interface IOrder extends IPaymentForm, IContactsForm {
 	items: string[];
 	total: number;
 }
 
-export type OrderResult = Pick<IOrder, 'total'>;
+export type OrderResult = Pick<IOrder, 'total'> & {
+	id: string;
+};
 
 export interface ISuccess {
 	totalPrice: number;

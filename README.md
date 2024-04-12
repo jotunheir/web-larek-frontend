@@ -11,7 +11,7 @@
 - src/pages/index.html — HTML-файл главной страницы
 - src/types/index.ts — файл с типами
 - src/index.ts — точка входа приложения
-- src/styles/styles.scss — корневой файл стилей
+- src/scss/styles.scss — корневой файл стилей
 - src/utils/constants.ts — файл с константами
 - src/utils/utils.ts — файл с утилитами
 
@@ -98,13 +98,7 @@ price: number;
 ````
 ### Типизация кароточки товара
 ````
-interface ICard {
-description?: string;
-image?: string;
-title: string;
-category?: string;
-price: number | null;
-}
+interface ICard extends Omit<IItem, 'id'> {}
 
 interface ICardActions {
 onClick: (event: MouseEvent) => void;
